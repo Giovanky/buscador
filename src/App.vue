@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <h2>Geosearch</h2>
     <router-view/>
   </div>
 </template>
+
+<script>
+
+</script>
 
 <style>
 #app {
@@ -15,8 +16,11 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 #nav {

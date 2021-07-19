@@ -112,7 +112,7 @@ export default {
     position: absolute;
     top: 10rem;
     z-index: 1;
-    height: 24rem;
+    height: 40rem;
     width: 80%;
     border-radius: 3px;
     box-shadow: -12px 12px 12px 0px #3333;
