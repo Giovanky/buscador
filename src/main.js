@@ -7,14 +7,13 @@ import 'firebase/auth'
 
 Vue.config.devtools = true
 
-
 const firebaseConfig = {
-  apiKey: 'AIzaSyBS2GYJ00RdYX00Y1KWT9gV3eOTpvB9SYo',
-  authDomain: 'geosearch-e8050.firebaseapp.com',
-  projectId: 'geosearch-e8050',
-  storageBucket: 'geosearch-e8050.appspot.com',
-  messagingSenderId: '1084270915725',
-  appId: '1:1084270915725:web:a21cd02bba7225203772c4'
+  apiKey: process.env.VUE_APP_FBKEY,
+  authDomain: process.env.VUE_APP_DOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_SENDERID,
+  appId: process.env.VUE_APP_APPID
 }
 
 firebase.initializeApp(firebaseConfig)
@@ -26,4 +25,3 @@ firebase.auth().onAuthStateChanged(function(user){
     render: h => h(App)
   }).$mount('#app')
 })
-
