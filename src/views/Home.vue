@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <button @click="logout">Cerrar Sesion</button>
+      <button class="button" @click="logout">Cerrar Sesion</button>
     </div>
     <Front />
   </div>

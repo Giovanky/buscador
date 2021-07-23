@@ -2,10 +2,12 @@
   <div class="container"> 
     <h1 class="title">Geosearch</h1>
     <form class="form">
-      <input class="input" type="text" v-model="search" placeholder="Nombre Ubicación">
+      <select v-model="search" class="select" name="search" required>
+        <option :value="record.fields.id" v-for="record of allRecords" :key="record._id">{{record.fields.name}}</option>
+      </select>
     </form>
 
-    <div id="map">
+    <div class="map" id="map">
       
     </div>
   </div>
@@ -34,6 +36,8 @@ export default {
         }
       }).catch(err => console.log(err))
       this.allRecords = data.data.records
+      // satanizando sort() :v
+      // data.data.records.map(el => console.log(el.fields.name))
     },
 
     async initMap() {
@@ -45,7 +49,7 @@ export default {
         // ...additionalOptions,
       })
       loader.load().then(() => {
-        const map = new google.maps.Map(document.getElementById("map"), {
+        const map = new google.maps.Map(document.getElementById('map'), {
           center: position,
           zoom: 17,
         })
@@ -64,57 +68,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  html, body{
-    padding: 0;
-    margin: 0;
-  }
-
-  .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-
-  .title{
-    width: 100%;
-  }
-
-  .input{
-    font-size: 1.2rem;
-    padding: .6rem 1.2rem;
-    border-radius: 4px;
-    border: 1.08px solid #333;
-    outline: none;
-    margin: .8rem 1.6rem;
-    transition: border .2s;
-    color: #2c3e50;
-    width: 50vw;
-  }
-
-  .input:focus{
-    border: 1.083px solid #42b983;
-  }
-
-  .ulist{
-    list-style: none;
-    font-size: 1.4rem;
-    display: block;
-  }
-
-  #map{
-    position: absolute;
-    top: 10rem;
-    z-index: 1;
-    height: 40rem;
-    width: 80%;
-    border-radius: 3px;
-    box-shadow: -12px 12px 12px 0px #3333;
-  }
-</style>
