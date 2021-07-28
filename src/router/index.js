@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
+import Locations from '../views/Locations.vue'
+import Admin from '../views/Admin.vue'
 import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -32,6 +34,23 @@ const routes = [
     component: Home,
     meta: {
       auth: true
+    }
+  },
+  {
+    path: '/locations',
+    name: 'Locations',
+    component: Locations,
+    meta: {
+      auth: true
+    }
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: Admin,
+    meta: {
+      auth: true,
+      admin: true 
     }
   }
 ]

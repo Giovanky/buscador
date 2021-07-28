@@ -1,10 +1,13 @@
 <template>
   <div class="container"> 
-    <h1 class="title">Geosearch</h1>
-    <form class="form">
-      <select v-model="search" class="select" name="search" required>
-        <option :value="record.fields.id" v-for="record of allRecords" :key="record._id">{{record.fields.name}}</option>
+    <h2 class="container__title mt-sm">Seleccione Ubicacion</h2>
+    <form class="container__form">
+      <select v-model="search" class="container__select" name="search" required>
+        <option :value="location.fields" v-for="location of allLocations" :key="location._id">{{location.fields.name}}</option>
       </select>
+      <button class="container__button" @click.prevent="searchLocation(search)">
+        Buscar
+      </button>
     </form>
 
     <div class="map" id="map">
@@ -21,7 +24,7 @@ export default {
   name: 'Front',
   data() {
     return {
-      allRecords: [],
+      allLocations: [],
       search: '',
     }
   },
@@ -29,42 +32,60 @@ export default {
 
   },
   methods: {
-    async doHttpCall() {
+    async getApiLocations() {
       const data = await axios(`${process.env.VUE_APP_URL}/ubication`, {
         headers: {
           'Authorization': `Bearer ${process.env.VUE_APP_APYKEY}`
         }
       }).catch(err => console.log(err))
-      this.allRecords = data.data.records
+      this.allLocations = data.data.records
       // satanizando sort() :v
       // data.data.records.map(el => console.log(el.fields.name))
     },
 
-    async initMap() {
-      const position = { lat: -27.071845, lng: -70.824434 }
-
+    async initMap(lat, lng) {
+      const position = {lat, lng}
       const loader = new Loader({
         apiKey: process.env.VUE_APP_GOOGLE_APIKEY,
         version: 'weekly',
-        // ...additionalOptions,
       })
       loader.load().then(() => {
         const map = new google.maps.Map(document.getElementById('map'), {
           center: position,
-          zoom: 17,
+          zoom: 15,
         })
-
         const marker = new google.maps.Marker({
           position,
           map,
         })
       }).catch(err => console.log(err))
-      
+    },
+
+    searchLocation(location) {
+      if(location){
+        this.initMap(location.geoX, location.geoY)
+      }else{
+        console.log('seleccione ubicacion')
+      }
+    },
+
+    async getLocation() {
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position => {
+          this.initMap(position.coords.latitude ,position.coords.longitude)
+        }, err => console.log(err), {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        })
+      }else{
+        console.log('El navegador no soporta geolocalizacion')
+      }
     }
   },
   mounted() {
-    this.doHttpCall()
-    this.initMap()
+    this.getLocation()
+    this.getApiLocations()
   }
 }
 </script>

@@ -1,19 +1,23 @@
 <template>
   <div class="container">
     <Nav />
-    <Front />
+    <table>
+      
+    </table>
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
-import Front from '@/components/Front.vue'
 
 export default {
-  name: 'Home',
+  name: 'Locations',
   components: {
-    Nav,
-    Front
+    Nav
+  },
+  methods: {
+  
   }
 }
 </script>
+

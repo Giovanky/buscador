@@ -2,7 +2,7 @@
 
 .button{
     border: none;
-    background-color: var(--clr-dark);
+    background-color: var(--clr-primary);
     border-radius: .8rem;
     color: var(--clr-white);
     cursor: pointer;
@@ -16,16 +16,16 @@
     width: 100%;
          
     &:hover{
-        background-color: lighten($color: #000000, $amount: 8%);
+        background-color: lighten($color: #3cee54, $amount: 8%);
     }
 
     &:active{
-        background-color: lighten($color: #000000, $amount: 16%);
+        background-color: lighten($color: #3cee54, $amount: 16%);
         transform: scale(.99);
     }
 
     &:disabled{
-        background-color: lighten($color: #000000, $amount: 40%);
+        background-color: lighten($color: #3cee54, $amount: 40%);
     }
 
     &:focus{

@@ -1,0 +1,19 @@
+.nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.480rem;
+    font-weight: 500;
+    padding: .8rem;
+    box-shadow: 0 0 8px 0 #3333;
+
+    & > *:not(:last-of-type){
+        margin-right: 1.6rem;
+    }
+}
+
+.nav-button{
+    color: var(--clr-dark);
+    text-decoration: none;
+}
