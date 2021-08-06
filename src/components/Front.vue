@@ -2,10 +2,11 @@
   <div class="container"> 
     <h2 class="container__title mt-sm">Seleccione Ubicacion</h2>
     <form class="container__form">
-      <select v-model="search" class="container__select" name="search" required>
-        <option :value="location.fields" v-for="location of allLocations" :key="location._id">{{location.fields.name}}</option>
-      </select>
-      <button class="container__button" @click.prevent="searchLocation(search)">
+      <cool-select
+        v-model="selected"
+        :items="nameLocations"
+      />
+      <button class="container__button" @click.prevent="searchLocation(selected)">
         Buscar
       </button>
     </form>
@@ -17,15 +18,20 @@
 </template>
 
 <script>
+import { CoolSelect } from 'vue-cool-select'
 import axios from 'axios'
 import { Loader } from '@googlemaps/js-api-loader'
 
 export default {
   name: 'Front',
+  components: {
+    CoolSelect
+  },
   data() {
     return {
       allLocations: [],
-      search: '',
+      nameLocations: [],
+      selected: null
     }
   },
   computed: {
@@ -39,8 +45,7 @@ export default {
         }
       }).catch(err => console.log(err))
       this.allLocations = data.data.records
-      // satanizando sort() :v
-      // data.data.records.map(el => console.log(el.fields.name))
+      this.nameLocations = this.allLocations.map(lct => lct.fields.name)
     },
 
     async initMap(lat, lng) {
@@ -62,11 +67,11 @@ export default {
     },
 
     searchLocation(location) {
-      if(location){
-        this.initMap(location.geoX, location.geoY)
-      }else{
-        console.log('seleccione ubicacion')
+      if(!location){
+        console.log('ingrese ubicacion')
       }
+      const filteredLocation = this.allLocations.filter(lct => lct.fields.name === this.selected)
+      this.initMap(filteredLocation[0].fields.geoX, filteredLocation[0].fields.geoY)
     },
 
     async getLocation() {

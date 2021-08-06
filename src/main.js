@@ -5,8 +5,11 @@ import store from '@/store'
 import '@/sass/main.scss'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { CoolSelectPlugin } from 'vue-cool-select'
+import 'vue-cool-select/dist/themes/material-design.css'
 
 Vue.config.devtools = true
+Vue.use(CoolSelectPlugin)
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FBKEY,

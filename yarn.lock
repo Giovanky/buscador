@@ -8041,6 +8041,11 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npmjs.org/vm-browserify/-/vm-browserify-1.1.2.tgz"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-cool-select@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/vue-cool-select/-/vue-cool-select-3.5.2.tgz#d1ad160e6807365d351a2e5d505caefa329dba35"
+  integrity sha512-+a5dzyp0RmfiMbW1bnhHFvK2R2nTND6cAO61WkUDCGE29pJ8GbUknBHxJHsA1uZXtGNN/xLEmUQD6wA8aVbKwQ==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
