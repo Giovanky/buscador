@@ -48,8 +48,9 @@ export default {
       this.nameLocations = this.forestLocations.map(lct => lct.fields.name)
     },
 
-    async initMap(lat, lng) {
-      const position = {lat, lng}
+    async initMap(location) {
+      const {geoX, geoY, name, description} = location[0].fields
+      const position = {lat: geoX, lng: geoY}
       const loader = new Loader({
         apiKey: process.env.VUE_APP_GOOGLE_APIKEY,
         version: 'weekly',
@@ -63,6 +64,15 @@ export default {
           position,
           map,
         })
+        const content = `<h1 class="window__title">${name}<h1/>
+          <p class="window__description">${description}<p/>
+        `
+        const info = new google.maps.InfoWindow({
+          content
+        })
+        marker.addListener('click', () => {
+          info.open(map, marker)
+        })
       }).catch(err => console.log(err))
     },
 
@@ -71,16 +81,17 @@ export default {
         alert('ingrese ubicacion')
       }
       const filteredLocation = this.forestLocations.filter(lct => lct.fields.name === this.selected)
-      this.initMap(filteredLocation[0].fields.geoX, filteredLocation[0].fields.geoY)
+      this.initMap(filteredLocation)
     },
 
     async getLocation() {
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(position => {
           this.initMap(position.coords.latitude ,position.coords.longitude)
+          console.log('intentando localizar...')
         }, err => console.log(err), {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 20000,
           maximumAge: 0
         })
       }else{

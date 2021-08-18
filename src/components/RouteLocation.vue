@@ -26,10 +26,6 @@ import { CoolSelect } from 'vue-cool-select'
 import axios from 'axios'
 import { Loader } from '@googlemaps/js-api-loader'
 
-// const directionsService = new google.maps.DirectionsService()
-// const directionsDisplay = new google.maps.DirectionsRenderer()
-
-
 export default {
   name: 'RouteLocation',
   components: {
@@ -59,69 +55,88 @@ export default {
     },
 
     async initMap(lat, lng) {
+      const directionsService = new google.maps.DirectionsService()
+      const directionsRenderer = new google.maps.DirectionsRenderer()
+
       const position = {lat, lng}
       const loader = new Loader({
         apiKey: process.env.VUE_APP_GOOGLE_APIKEY,
         version: 'weekly',
       })
-      loader.load().then(() => {
-        const map = new google.maps.Map(document.getElementById('map'), {
-          center: position,
-          zoom: 15,
-        })
-        // const marker = new google.maps.Marker({
-        //   position,
-        //   map,
-        // })
-      }).catch(err => console.log(err))
-    },
-
-    routeLocation(origin, destiny) {
-      if(!origin || !destiny){
-        alert('ingrese ubicacion')
-      }
-      
-      const filteredOrigin = this.forestLocations.filter(lct => lct.fields.name === this.origin)
-      const filteredDestiny = this.forestLocations.filter(lct => lct.fields.name === this.destiny)  
-      const {geoX: geoXOrigin, geoY: geoYOrigin} = filteredOrigin[0].fields
-      const {geoX: geoXDestiny, geoY: geoYDestiny} = filteredDestiny[0].fields
-      const originLocation = {
-        lat: geoXOrigin,
-        lng: geoYOrigin
-      }
-      const destinyLocation = {
-        lat: geoXDestiny,
-        lng: geoYDestiny
-      }
-      const loader = new Loader({
-        apiKey: process.env.VUE_APP_GOOGLE_APIKEY,
-        version: 'weekly',
+      // loader.load().then(() => {
+      //   const map = new google.maps.Map(document.getElementById('map'), {
+      //     center: position,
+      //     zoom: 15,
+      //   })
+      //   // const marker = new google.maps.Marker({
+      //   //   position,
+      //   //   map,
+      //   // })
+      // }).catch(err => console.log(err))
+      const map = new google.maps.Map(
+        document.getElementById('map'), {
+          zoom: 14,
+          center: { lat: 37.77, lng: -122.447 
+        },
       })
-      loader.load().then(() => {
-        const map = new google.maps.Map(document.getElementById('map'), {
-          center: originLocation,
-          zoom: 12
-        })
-        directionsDisplay.setMap(map);
-        google.maps.event.addListenerOnce(map, 'idle', () => {
-          document.getElementById('map').classList.add('show-map');
-          this.calculateRoute(originLocation, destinyLocation);
-        })
-      }).catch(err => console.log(err))
+      DirectionsRenderer.setMap(map)
     },
 
-    calculateRoute(origin, destination) {
-      directionsService.route({
-      origin,
-      destination,
-      travelMode: google.maps.TravelMode.DRIVING,
-    }, (response, status)  => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        this.directionsDisplay.setDirections(response);
-      } else {
-        alert('Could not display directions due to: ' + status);
-      }
-    })
+    // routeLocation(origin, destiny) {
+    //   if(!origin || !destiny){
+    //     alert('ingrese ubicacion')
+    //   }
+      
+    //   const filteredOrigin = this.forestLocations.filter(lct => lct.fields.name === this.origin)
+    //   const filteredDestiny = this.forestLocations.filter(lct => lct.fields.name === this.destiny)  
+    //   const {geoX: geoXOrigin, geoY: geoYOrigin} = filteredOrigin[0].fields
+    //   const {geoX: geoXDestiny, geoY: geoYDestiny} = filteredDestiny[0].fields
+    //   const originLocation = {
+    //     lat: geoXOrigin,
+    //     lng: geoYOrigin
+    //   }
+    //   const destinyLocation = {
+    //     lat: geoXDestiny,
+    //     lng: geoYDestiny
+    //   }
+    //   const loader = new Loader({
+    //     apiKey: process.env.VUE_APP_GOOGLE_APIKEY,
+    //     version: 'weekly',
+    //   })
+    //   loader.load().then(() => {
+    //     const map = new google.maps.Map(document.getElementById('map'), {
+    //       center: originLocation,
+    //       zoom: 12
+    //     })
+    //     directionsDisplay.setMap(map);
+    //     google.maps.event.addListenerOnce(map, 'idle', () => {
+    //       document.getElementById('map').classList.add('show-map');
+    //       this.calculateRoute(originLocation, destinyLocation);
+    //     })
+    //   }).catch(err => console.log(err))
+    // },
+
+    // calculateRoute(origin, destination) {
+    //   directionsService.route({
+    //   origin,
+    //   destination,
+    //   travelMode: google.maps.TravelMode.DRIVING,
+    // }, (response, status)  => {
+    //   if (status === google.maps.DirectionsStatus.OK) {
+    //     this.directionsDisplay.setDirections(response);
+    //   } else {
+    //     alert('Could not display directions due to: ' + status);
+    //   }
+    // })
+    // },
+
+    calculateRoute(directionsService, directionsRenderer) {
+      directionsService.Route({
+        origin: '',
+        destination: '',
+        travelMode: ''
+      })
+
     },
 
     async getLocation() {
