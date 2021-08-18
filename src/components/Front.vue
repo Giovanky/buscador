@@ -80,13 +80,8 @@ export default {
       if(!location){
         console.log('ingrese ubicacion')
       }
-<<<<<<< HEAD:src/components/Front.vue
-      const filteredLocation = this.allLocations.filter(lct => lct.fields.name === this.selected)
-      this.initMap(filteredLocation[0].fields.geoX, filteredLocation[0].fields.geoY)
-=======
       const filteredLocation = this.forestLocations.filter(lct => lct.fields.name === this.selected)
       this.initMap(filteredLocation)
->>>>>>> 6058c3413d57b06038769d8481a58584bfc30ef4:src/components/SearchLocation.vue
     },
 
     async getLocation() {
