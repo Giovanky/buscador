@@ -1,0 +1,12 @@
+.window{
+    
+    &__title{
+        font-size: 1.8rem;
+        color: var(--clr-dark);
+    }
+
+    &__description{
+        font-size: 1.6rem;
+        color: var(--clr-dark-light);
+    }
+}
