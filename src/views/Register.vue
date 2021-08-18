@@ -2,7 +2,7 @@
     <form class="form">
         <h1 class="form__title">Registrarse</h1>
         <p class="form__info">Acompañanos y descubre todo lo que tenemos para tí!</p>
-        <input type="text" class="input" v-model="email" name="email" placeholder="Ingrese Usuario">
+        <input type="text" class="input" v-model="user" name="user" placeholder="Ingrese Usuario">
         <input type="text" class="input" v-model="password" name="password" placeholder="Ingrese Contraseña">
         <button class="button" @click.prevent="register">
         Registrarse

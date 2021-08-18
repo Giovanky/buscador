@@ -1,19 +1,19 @@
 <template>
   <div class="container">
     <Nav />
-    <SearchLocation />
+    <Front />
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
-import SearchLocation from '@/components/SearchLocation.vue'
+import Front from '@/components/Front.vue'
 
 export default {
   name: 'Home',
   components: {
     Nav,
-    SearchLocation
+    Front
   }
 }
 </script>

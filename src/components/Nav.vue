@@ -1,7 +1,6 @@
 <template>
   <div id="nav" class="nav">
-    <router-link class="nav-button" to="/">Buscar</router-link> 
-    <router-link class="nav-button" to="/route">Ruta</router-link> 
+    <router-link class="nav-button" to="/">Portada</router-link> 
     <router-link class="nav-button" to="/locations">Mis Ubicaciones</router-link> 
     <router-link class="nav-button" to="/admin">Administrar</router-link> 
     <a class="nav-button" @click="logout">Cerrar Sesion</a>

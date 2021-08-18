@@ -23,15 +23,15 @@ import axios from 'axios'
 import { Loader } from '@googlemaps/js-api-loader'
 
 export default {
-  name: 'SearchLocation',
+  name: 'Front',
   components: {
     CoolSelect
   },
   data() {
     return {
-      forestLocations: [],
+      allLocations: [],
       nameLocations: [],
-      selected: null,
+      selected: null
     }
   },
   computed: {
@@ -44,8 +44,8 @@ export default {
           'Authorization': `Bearer ${process.env.VUE_APP_APYKEY}`
         }
       }).catch(err => console.log(err))
-      this.forestLocations = data.data.records
-      this.nameLocations = this.forestLocations.map(lct => lct.fields.name)
+      this.allLocations = data.data.records
+      this.nameLocations = this.allLocations.map(lct => lct.fields.name)
     },
 
     async initMap(lat, lng) {
@@ -68,9 +68,9 @@ export default {
 
     searchLocation(location) {
       if(!location){
-        alert('ingrese ubicacion')
+        console.log('ingrese ubicacion')
       }
-      const filteredLocation = this.forestLocations.filter(lct => lct.fields.name === this.selected)
+      const filteredLocation = this.allLocations.filter(lct => lct.fields.name === this.selected)
       this.initMap(filteredLocation[0].fields.geoX, filteredLocation[0].fields.geoY)
     },
 

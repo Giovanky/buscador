@@ -12,10 +12,9 @@
     }
 
     &__form{
-        width: 80rem; 
+        width: 40rem; 
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         
         select{
@@ -28,10 +27,6 @@
             background-color: transparent;
             flex: 1 1 auto;
         }
-
-        & > *:not(:last-child) {
-            margin-right: .8rem;
-        }
     }
 
     &__button{
@@ -41,9 +36,9 @@
         color: var(--clr-white);
         cursor: pointer;
         font-family: 'Ubuntu', Arial;
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        padding: 1.2rem 1.6rem;
+        padding: .8rem 1.6rem;
         text-align: center;
         text-decoration: none;
         transition: transform .2s ease-out;
